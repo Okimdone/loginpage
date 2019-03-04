@@ -12,5 +12,15 @@
     }
 
     function islogin ($uname, $passwd) {
-        
+        global $UNAME; global $PASSWDS;
+
+        foreach( $UNAME as $index => $name) {
+            if($name === $uname) {
+                if($PASSWDS[$index] === $passwd){
+                    return TRUE;
+                }
+                return FALSE;
+            }
+        }
+        return FALSE;
     }
