@@ -8,7 +8,15 @@
     }
 
     function load_csv () {
-
+		global $UNAME ;
+	    global $PASSWDS ;
+	    $file = fopen('users.csv', 'r');
+    	while ( !feof($file)) { 	
+    	 	$line = fgets($file);
+    	 	$tab = explode(";", $line);
+    	 	$UNAME[] = $tab[0]; $PASSWDS[] = $tab[1];
+    	}
+    	fclose($file);
     }
 
     function islogin ($uname, $passwd) {
