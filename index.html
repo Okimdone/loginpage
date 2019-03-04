@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login page</title>
+    <script src="js/jscript.js"></script>
 </head>
 <body>
     <h1> LOGIN </h1>
     <form action="login.php" method="post">
         <Label>
             User Name : 
-            <input type="text" name="uname" >
+            <input type="text" name="uname" id="uname" >
         </Label>
         <label >
             Password :
-            <input type="password" name="psswd">
+            <input type="password" name="psswd" id = "passwd" > 
         </label>
         <div>
-            <input type="button" value="Annulée">
+            <input type="button" value="Annulée" onclick="annuler();" >
             <input type="submit" value="OK">
         </div>
     </form>
