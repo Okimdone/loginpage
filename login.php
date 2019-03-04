@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php 
-        if(isset($_POST['uname']) && isset($_POST['psswd']) AND islogin($_POST['uname'], $_POST['psswd']) ){
+        if(isset($_POST['uname']) && isset($_POST['passwd']) AND islogin($_POST['uname'], $_POST['passwd']) ){
             echo "niiiice";
         }else {
             echo "Not nice";
