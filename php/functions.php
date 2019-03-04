@@ -10,7 +10,7 @@
     function load_csv () {
 		global $UNAME ;
 	    global $PASSWDS ;
-	    $file = fopen('users.csv', 'r');
+	    $file = fopen('../data/users.csv', 'r');
     	while ( !feof($file)) { 	
     	 	$line = fgets($file);
     	 	$tab = explode(";", $line);
