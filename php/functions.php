@@ -2,6 +2,7 @@
     //globale variables to store login infos
     global $UNAME ; $UNAME = array();
     global $PASSWDS;$PASSWDS = array();
+    global $f ;$f ='data\users.csv' ;
     load_csv();
     
     function cryptthis ($passwd ) {
@@ -11,13 +12,16 @@
     function load_csv () {
 		global $UNAME ;
 	    global $PASSWDS ;
-	    $file = fopen('../data/users.csv', 'r');
+	    global $f;
+	    if (file_exists($f)) {
+	    $file = fopen($f, 'r');
     	while ( !feof($file)) { 	
     	 	$line = fgets($file);
     	 	$tab = explode(";", $line);
     	 	$UNAME[] = $tab[0]; $PASSWDS[] = $tab[1];
     	}
     	fclose($file);
+	    }
     }
 
     function islogin ($uname, $passwd) {
