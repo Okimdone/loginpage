@@ -8,7 +8,12 @@
     <?php require_once("php/functions.php") ?>
 </head>
 <body>
-    HAHAAAAAAAAA
-    <?php islogin("admin", "pass"); ?>
+    <?php 
+        if(isset($_POST['uname']) && isset($_POST['psswd']) AND islogin($_POST['uname'], $_POST['psswd']) ){
+            echo "niiiice";
+        }else {
+            echo "Not nice";
+        }
+    ?>
 </body>
 </html>

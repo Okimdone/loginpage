@@ -2,7 +2,8 @@
     //globale variables to store login infos
     global $UNAME ; $UNAME = array();
     global $PASSWDS;$PASSWDS = array();
-
+    load_csv();
+    
     function cryptthis ($passwd ) {
         return $passwd;
     }
