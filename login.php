@@ -9,11 +9,21 @@
 </head>
 <body>
     <?php 
-        if(isset($_POST['uname']) && isset($_POST['passwd']) AND islogin($_POST['uname'], $_POST['passwd']) ){
-            echo "niiiice";
-        }else {
-            echo "Not nice";
+        if(isset($_POST['uname']) && isset($_POST['psswd']) AND islogin($_POST['uname'], $_POST['psswd']) ){
+            echo "niiiice <br>";}
+        else {
+        	 echo "Not nice <br>";
         }
     ?>
+
+    <?php
+        if(isset($_POST['uname1']) && isset($_POST['psswd1']) && isset($_POST['confpsswd'])){
+        	  enregistrer($_POST['uname1'],$_POST['psswd1']);
+        }
+        if (strnatcmp($_POST['psswd1'],$_POST['confpsswd']) != 0 ) {
+        	echo "votre mdp est erroné <br>";
+        }
+    ?>
+
 </body>
 </html>
