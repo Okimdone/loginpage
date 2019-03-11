@@ -5,16 +5,20 @@
     global $f ;$f ='data\users.csv' ;//change the slash Windows/Linux
     load_csv();
     
-    function cryptthis (&$passwd ) {
-        $tab = $passwd ;
-        $strlen = strlen($tab)-1;
-        for ($i=0; $i <$strlen/2 ; $i++) { 
-            $swap = $tab[$strlen] ;
-            $tab[$strlen] = $tab[$i];
-            $tab[$i] = $swap ;
-            $strlen--;
-        }
-        return $tab;
+    function cryptthis ($passwd ) {
+         $strlen = strlen($passwd)-1;
+         $hack = '';
+         for ($i=0; $i <=$strlen/2 ; $i++) { 
+            $swap = $passwd[$strlen - $i] ;
+            $passwd[$strlen - $i] = $passwd[$i];
+            $passwd[$i] = $swap ; 
+         }
+         $strlen = strlen($passwd);
+         for ($i=0; $i < $strlen ; $i++) { 
+           $nbr = ord($passwd[$i]);
+           $hack = $hack."$nbr";
+         }
+        return  $hack;
     }
     
     function enregistrer($uname,&$mdp){
