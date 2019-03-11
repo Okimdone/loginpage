@@ -1,0 +1,86 @@
+/*
+**	Background color for the page s body
+*/
+body {
+	background-color: #292929;
+}
+
+/*
+**	Background grid with a slightly birghter grey behind the login form
+*/
+.login-grid {
+	width: 536px;
+	height: 640px;
+	background-color: #4f4f4f;
+	margin: 32px auto 32px auto;
+	overflow: auto;
+}
+
+/*
+**	Welcoming header
+*/
+h1.text-center {
+	font-size: 82px;
+	font-family: roboto;
+	width: 352px;
+	height: 115px;
+	margin: 92px auto 0px auto;
+	color:rgb(255,255,255);
+}
+
+/*
+**	Centering and setting the width for the whole from 
+*/
+div.form-div {
+	width: 352.44px;
+	margin: 83px auto 70px auto;
+}
+
+/*
+**	Form input
+*/
+#uname {
+	margin-bottom: 11.24px;
+}
+
+/*
+**	buttons ok n annuller positionning 
+*/
+div.form-group-btns {
+	margin-top: 83.24px;
+	margin-bottom: 18px;
+}
+
+.btn {
+	width: 168.44px;
+	height: 45.76px;
+	background-color: #2c83db;
+}
+
+.btn-ok {
+	float:right;
+}
+
+/*
+**	account s options 
+*/
+div.account-opt {
+	width: 304px;
+	margin-left: auto;
+	margin-right: auto;
+	border-top: 2px solid #a2a2a2;
+	padding-top: 12.24px;
+	padding-left:18px;
+	padding-right:18px;
+
+	font-size:13px;
+}
+
+a#forgoten {
+	color: #A2A2A2;
+	margin-right: 16px;
+}
+
+a#register {
+	color: #ffffff;
+}

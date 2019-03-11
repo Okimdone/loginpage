@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login page</title>
-    <script src="js/jscript.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="assets\css\css.css">
+    <script src="assets/js/jscript.js"></script>
 </head>
 <body>
-    <h1> LOGIN </h1>
-    <form action="login.php" method="post">
-        <Label>
-            User Name : 
-            <input type="text" name="uname" id="uname" >
-        </Label>
-        <label >
-            Password :
-            <input type="password" name="psswd" id = "passwd" > 
-        </label>
-        <div>
-            <input type="button" value="Annulée" onclick="annuler();" >
-            <input type="submit" value="OK">
-            <p>soyez plus nombreux et enregistrer dans notre sire</p>
-            <a href="enregistrer.php">enregistrer</a>
+    <div class="login-grid">
+        <h1 class="text-center">Welcome</h1>
+        <div class="form-div">
+            <form action="login.php" method="post">
+                <div class="form-group">
+                	<input class="form-control" id="uname" type="text" placeholder="Username" required > 
+                	<input class="form-control" id="passwd"   type="password" placeholder="Password"required>
+                </div>
+                <div class="form-group-btns">
+                	<button class="btn btn-primary" type="button" onclick="annuler();">Annuller</button>
+                	<input class="btn btn-primary btn-ok" type="submit" value="Ok">
+                </div>
+            </form>
+            <div class="account-opt">
+            	<a class="opt-acc" id="forgoten" href="#">Mot de passe oublié ?</a>
+            	<a class="opt-acc" id="register" href="enregistrer.php">Créer un compte</a>
+            </div>
         </div>
-    </form>
+    </div>
 </body>
 </html>
