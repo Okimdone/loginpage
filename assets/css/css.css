@@ -92,3 +92,7 @@ a#forgoten {
 a#register {
 	color: #ffffff;
 }
+
+.text-center {
+	text-align: center;
+}

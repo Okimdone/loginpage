@@ -6,12 +6,12 @@
     if(isset($_POST['route']) && $_POST['route']==="login") {
 
         // if login informations are set 
-        if(isset($_POST['uname']) && isset($_POST['psswd'])){
-        
+        if(isset($_POST['uname']) && isset($_POST['passwd'])){
+                
             require_once("php/functions.php");
             // and the input is actually registered the redirect to the content
-            if( islogin($_POST['uname'], $_POST['psswd']) ) {
-
+            if( islogin($_POST['uname'], $_POST['passwd']) ) {
+                
                 //This is supposed to contains the content of the page
                 $smarty->display("$path/V/templates/layout.tpl");
                 die();

@@ -5,6 +5,7 @@
     $f ='data/users.csv' ;//change the slash Windows/Linux
     load_csv();
     
+    // takes 
     function cryptthis ($passwd ) {
          $strlen = strlen($passwd)-1;
          $hack = '';
@@ -23,13 +24,12 @@
     
     function enregistrer($uname,&$mdp){
         global $f;
-        $a = cryptthis( $mdp);
-        $b = $uname.';'.$a ."\n" ;
-        if (file_exists($f)) {
-            $file = fopen($f,'a+');
+        $b = $uname.';'.cryptthis($mdp)."\n";
+        if ($file = fopen($f,'a+')) {
             fputs($file,$b,strlen($b));
-            echo "felicitation vous etes un membre :) $b!";
             fclose($file);
+        } else {
+            die("Couldn t create / open file / enregitrer");
         }
     }
 
@@ -38,12 +38,13 @@
 	    global $PASSWDS ;
 	    global $f;
 	    if (file_exists($f)) {
-            $file = fopen($f, 'r');
-            while ($line = fgets($file)) { 	
-                $tab = explode(";", trim($line));
-                $UNAME[] = $tab[0]; $PASSWDS[] = $tab[1];
-            }
-            fclose($file);
+            if($file = fopen($f, 'r')) {
+                while ($line = fgets($file)) { 	
+                    $tab = explode(";", trim($line));
+                    $UNAME[] = $tab[0]; $PASSWDS[] = $tab[1];
+                }
+                fclose($file);
+            } 
 	    }
     }
 
@@ -59,4 +60,40 @@
             }
         }
         return FALSE;
+    }
+
+    function uname_exists($uname) {
+        global $UNAME;
+        foreach($UNAME as $name){
+            if( $uname === $name){
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
+    function change_pass_for_user($uname, $newpass) {
+
+        global $UNAME, $PASSWDS, $f;
+        // Make the change the the $UNAME array
+        foreach($UNAME as $index => $name) {
+            
+            if($name == $uname) {
+                $PASSWDS[$index] = cryptthis($newpass);
+                break;
+            }
+        }
+
+        //applay the changes to the actual csv files for users data
+        if ($file = fopen($f,'w')) {
+            ftruncate($file, 0);
+            foreach($UNAME as $index => $name) {
+                $ligne = $name.";".$PASSWDS[$index]."\n";
+                fputs($file,$ligne,strlen($ligne));
+            }
+            fclose($file);
+        } else {
+            die("Couldn t create / open file / change-pass");
+        }
+
     }

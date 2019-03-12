@@ -7,7 +7,7 @@
             <form action="index.php" method="post">
                 <div class="form-group">
                 	<input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="Username" required > 
-                	<input class="form-control" name= "psswd" id="passwd"   type="password" placeholder="Password"required>
+                	<input class="form-control" name= "passwd" id="passwd"   type="password" placeholder="Password"required>
                 </div>
                 {if $badlogin eq TRUE}
                     <div id="error-msg">
@@ -22,7 +22,7 @@
                 <input type="hidden" name="route" value="login"/>
             </form>
             <div class="account-opt">
-            	<a class="opt-acc" id="forgoten" href="#">Mot de passe oublié ?</a>
+            	<a class="opt-acc" id="forgoten" href="recover.php">Mot de passe oublié ?</a>
             	<a class="opt-acc" id="register" href="enregistrer.php">Créer un compte</a>
             </div>
         </div>
