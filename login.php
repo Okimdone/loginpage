@@ -8,6 +8,9 @@
     <?php require_once("php/functions.php") ?>
 </head>
 <body>
+<?php 
+    var_dump($_GET['action']);
+    ?>
     <?php 
         if(isset($_POST['uname']) && isset($_POST['psswd']) AND islogin($_POST['uname'], $_POST['psswd']) ){
             echo "niiiice <br>";}

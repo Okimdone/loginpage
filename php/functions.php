@@ -49,13 +49,9 @@
 
     function islogin ($uname, &$passwd) {
         global $UNAME; global $PASSWDS;
-        echo $uname . $passwd;
         $passwd = cryptthis($passwd);
-        echo "_______" . $passwd;
         foreach($UNAME as $index => $name) {
-            echo "if(".$name."===".$uname.")<br>";
             if($name === $uname) {
-                var_dump($PASSWDS[$index]); var_dump($passwd);
                 if($PASSWDS[$index] === $passwd){
                     return TRUE;
                 }
