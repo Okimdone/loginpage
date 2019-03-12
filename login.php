@@ -18,7 +18,7 @@
 
     <?php
         if(isset($_POST['uname1']) && isset($_POST['psswd1']) && isset($_POST['confpsswd'])){
-        	  enregistrer($_POST['uname1'],$_POST['psswd1']);
+        	enregistrer($_POST['uname1'],$_POST['psswd1']);
         }
         else if (strnatcmp($_POST['psswd1'],$_POST['confpsswd']) != 0 ) {
         	echo "votre mdp est erroné <br>";

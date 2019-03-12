@@ -1,8 +1,8 @@
 <?php 
     //globale variables to store login infos
-    global $UNAME ; $UNAME = array();
-    global $PASSWDS;$PASSWDS = array();
-    global $f ;$f ='data\users.csv' ;//change the slash Windows/Linux
+    $UNAME = array();
+    $PASSWDS = array();
+    $f ='data/users.csv' ;//change the slash Windows/Linux
     load_csv();
     
     function cryptthis ($passwd ) {
@@ -32,26 +32,30 @@
             fclose($file);
         }
     }
+
     function load_csv () {
 		global $UNAME ;
 	    global $PASSWDS ;
 	    global $f;
 	    if (file_exists($f)) {
             $file = fopen($f, 'r');
-            while ( !feof($file)) { 	
-                $line = fgets($file);
-                $tab = explode(";", $line);
+            while ($line = fgets($file)) { 	
+                $tab = explode(";", trim($line));
                 $UNAME[] = $tab[0]; $PASSWDS[] = $tab[1];
             }
             fclose($file);
 	    }
     }
 
-    function islogin ($uname, $passwd) {
+    function islogin ($uname, &$passwd) {
         global $UNAME; global $PASSWDS;
-
-        foreach( $UNAME as $index => $name) {
+        echo $uname . $passwd;
+        $passwd = cryptthis($passwd);
+        echo "_______" . $passwd;
+        foreach($UNAME as $index => $name) {
+            echo "if(".$name."===".$uname.")<br>";
             if($name === $uname) {
+                var_dump($PASSWDS[$index]); var_dump($passwd);
                 if($PASSWDS[$index] === $passwd){
                     return TRUE;
                 }

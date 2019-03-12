@@ -10,7 +10,7 @@ body {
 */
 .login-grid {
 	width: 536px;
-	height: 640px;
+	
 	background-color: #4f4f4f;
 	margin: 32px auto 32px auto;
 	overflow: auto;
@@ -39,10 +39,18 @@ div.form-div {
 /*
 **	Form input
 */
-#uname {
+.margin-bottom {
 	margin-bottom: 11.24px;
 }
 
+/*
+**	css for the error message informing that username or pass is incorrect
+*/
+#error-msg {
+	color: rgb(255, 102, 0); 
+	text-align: center; 
+	font-size: 0.8em;
+}
 /*
 **	buttons ok n annuller positionning 
 */
