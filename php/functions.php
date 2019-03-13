@@ -5,8 +5,8 @@
     $f ='data/users.csv' ;//change the slash Windows/Linux
     load_csv();
     
-    // takes 
-    function cryptthis ($passwd ) {
+    // Takes a password crypts it and then erases it
+    function cryptthis (&$passwd ) {
          $strlen = strlen($passwd)-1;
          $hack = '';
          for ($i=0; $i <=$strlen/2 ; $i++) { 
@@ -17,11 +17,17 @@
          $strlen = strlen($passwd);
          for ($i=0; $i < $strlen ; $i++) { 
            $nbr = ord($passwd[$i]);
-           $hack = $hack."$nbr";
+           $hack = $hack.$nbr;
+         }
+
+         // Erase the original password for safty
+         for ($i=0; $i < $strlen ; $i++) { 
+           $passwd[$i] = " ";
          }
         return  $hack;
     }
     
+    // Saves the uname and password in its arguments into the database-file 
     function enregistrer($uname,&$mdp){
         global $f;
         $b = $uname.';'.cryptthis($mdp)."\n";
@@ -33,6 +39,7 @@
         }
     }
 
+    // Load the database-file of usename passwords into Uname/passwd arrays
     function load_csv () {
 		global $UNAME ;
 	    global $PASSWDS ;
@@ -48,6 +55,7 @@
 	    }
     }
 
+    // takes a uname and a passwd n returns true if its an identifier or false if it s not
     function islogin ($uname, &$passwd) {
         global $UNAME; global $PASSWDS;
         $passwd = cryptthis($passwd);
@@ -62,6 +70,7 @@
         return FALSE;
     }
 
+    // Checks if uname exists in database-file usernames
     function uname_exists($uname) {
         global $UNAME;
         foreach($UNAME as $name){
@@ -72,6 +81,7 @@
         return FALSE;
     }
 
+    // Changes the password of a given username into the newpassword 
     function change_pass_for_user($uname, $newpass) {
 
         global $UNAME, $PASSWDS, $f;

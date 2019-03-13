@@ -11,7 +11,7 @@
                         <input type="text" name="uname" id="uname" required>
                         {if $uname_not_exists eq TRUE}
                             <div id="error-msg">
-                                Ce nom d'utilisateur est déjà utilisé. Essayez un autre nom.
+                                Veuillez saisir un nom d'utilisateur valide.
                             </div>
                         {/if}
                     </Label>
@@ -40,6 +40,9 @@
                 </div>
                 <input type="hidden" name="route" value="recovery"/>
             </form>
+            <div class="account-opt text-center" >
+            	<a class="opt-acc" id="register" href="index.php">Se connecter à un compte existant</a>
+            </div>
         </div>
     </div>
 {/block}

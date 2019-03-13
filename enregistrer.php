@@ -1,6 +1,14 @@
 <?php 
     // Smarty template s declaration
     require_once("php/smarty_config.php");    
+    
+    // If client has a cookie redirect him directly to the home page
+    if (isset($_COOKIE['login_cookie']))
+    {
+        header("Location: home.php");
+        die();
+    }
+
 
     // if what we re trying to do is registering a new account
     if(isset($_POST['route']) && $_POST['route']==="signup") {
