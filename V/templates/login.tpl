@@ -8,7 +8,7 @@
         <div class="form-div">
             <form action="index.php" method="post">
                 <div class="form-group">
-                	<input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="" required > 
+                	<input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="Nom d'utilisateur" required > 
                 	<input class="form-control" name= "passwd" id="passwd"   type="password" placeholder="Password"required>
                 </div>
                 {if $badlogin eq TRUE}

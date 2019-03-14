@@ -2,7 +2,9 @@
 {block name=title}Créer votre compte{/block}
 {block name=body}
     <div class="login-grid">
-        <h1 class="text-center">Sign Up Now!</h1>
+        <div class="nav-title header-login">
+            <h1 class="text-center">Sign Up Now!</h1>
+        </div>
         <div class="form-div">
                 
             <form action="enregistrer.php" method="post">
@@ -28,8 +30,8 @@
                         </div>
                     {/if}
                 </label>
-                <div>
-                    <input type="submit" value="Suivant">
+                <div class="form-group-btns">
+                    <input class="btn" type="submit" value="Suivant">
                 </div>
                 <input type="hidden" name="route" value="signup"/>
             </form>
