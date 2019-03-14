@@ -72,9 +72,11 @@ div.form-div {
 ** Reseting the password - last step - congrats message
 */
 .congrt-msg {
-	font-size: 22px;
+	font-size: 20px;
 	color : #82B888;
-	text-align: right;
+	text-align: center;
+	margin-top: -30px;
+	margin-bottom: 30px;
 }
 
 /*
@@ -116,7 +118,7 @@ a#register {
 }
 
 /*
-**i header for the recover ur acount s configuration
+** header for the recover ur acount s configuration
 */
 .font-60-centered {
 	text-decoration: none;
@@ -126,3 +128,10 @@ a#register {
 	line-height: 50px;
 }
 
+/*
+** Make placeholders visible
+*/
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #82B888 ;
+  opacity: 0.8; /* Firefox */
+}
