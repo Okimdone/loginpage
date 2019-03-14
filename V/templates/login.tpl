@@ -2,11 +2,13 @@
 {block name=title}Login page{/block}
 {block name=body}
     <div class="login-grid">
-        <h1 class="text-center">Welcome</h1>
+        <div class="nav-title header-login">
+            <h1 class="text-center">Login</h1>
+        </div>
         <div class="form-div">
             <form action="index.php" method="post">
                 <div class="form-group">
-                	<input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="Username" required > 
+                	<input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="" required > 
                 	<input class="form-control" name= "passwd" id="passwd"   type="password" placeholder="Password"required>
                 </div>
                 {if $badlogin eq TRUE}
@@ -17,7 +19,7 @@
                 {/if}
                 <div class="form-group-btns">
                 	<button class="btn btn-primary" type="button" onclick="annuler();">Annuller</button>
-                	<input class="btn btn-primary btn-ok" type="submit" value="Ok">
+                	<input class="btn btn-primary btn-ok" type="submit" value="Login">
                 </div>
                 <input type="hidden" name="route" value="login"/>
             </form>

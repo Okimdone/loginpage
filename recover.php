@@ -23,7 +23,6 @@
 
                     // username holds a value that doesn t correspond to any registered accounts
                     if ( !uname_exists($_POST['uname']) ) {
-                        var_dump($_POST['uname']);
                         $smarty->assign('fist_step', TRUE);
                         $smarty->assign('uname_not_exists', TRUE);    
                     } 

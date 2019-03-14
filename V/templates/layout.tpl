@@ -6,12 +6,19 @@
     <title> 
         {block name=title}{/block} 
     </title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     
+    <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+    
     <link rel="stylesheet" href="assets\css\css.css">
     <script src="assets/js/jscript.js"></script>
 </head>
 <body>
     {block name=body}{/block}
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
