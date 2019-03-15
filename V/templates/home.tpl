@@ -1,6 +1,11 @@
 {extends file="layout.tpl"}
 {block name=title}Home{/block}
 {block name=body}
+    <!-- modify div from modifing an entery in the "etudiants" table
+    and submiting it -->
+    <div>
+        
+    </div> 
     <a href="logout.php">Log Out!!</a>
     <table class="striped highlight">
     <thead>
@@ -13,20 +18,22 @@
        <th> ** </th>
     </thead>
     <tbody>
-        {section name=row loop=$etudiants}
+    {foreach from=$etudiants item=etudiant }
             <tr>
-            <form action="smartytest.php" method="post">
-                <input type="hidden" name="delete" value="{$etudiants[row].id}">
-                <td>{$etudiants[row].id}</td>
-                <td>{$etudiants[row].nom}</td>
-                <td>{$etudiants[row].prenom}</td>
-                <td>{$etudiants[row].note1}</td>
-                <td>{$etudiants[row].note2}</td>
-                <td>{$etudiants[row].moy}</td>
-                <input type="submit" value="DELETE"></form>
-            </pre>
+            <form action="home.php" method="post">
+                <input type="hidden" name="delete" value="{$etudiant->id}">
+                <td>{$etudiant->id}</td>
+                <td>{$etudiant->nom}</td>
+                <td>{$etudiant->prenom}</td>
+                <td>{$etudiant->note1}</td>
+                <td>{$etudiant->note2}</td>
+                <td>{$etudiant->moy}</td>
+                <td width="300px"><input type="submit" value="DELETE"> <button > Modifier </button></td>
+
+            </form>
             </tr>
-        {/section}
+
+        {/foreach}
     </tbody>
     </table>
 {{/block}}
