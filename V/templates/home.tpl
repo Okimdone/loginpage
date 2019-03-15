@@ -3,7 +3,7 @@
 {block name=body}   
     <a href="logout.php">Log Out!!</a>
 
-    <table>
+    <table class="striped highlight">
         <thead>
             <tr>
                 <th> Id </th>
@@ -17,10 +17,17 @@
         <tbody>
             {section loop=$etudiants name=row}
                 <tr>
-                    <td>  {$etudiants[row].id} </td>
-
+                    <td><input type="text" size="4" value = "{$etudiants[row]->id}"> </td>
+                    <td><input type="text" size="4" value = "{$etudiants[row]->nom}"> </td>
+                    <td><input type="text" size="4" value = "{$etudiants[row]->prenom}"> </td>
+                    <td><input type="text" size="4" value ="{$etudiants[row]->note1}"> </td>
+                    <td><input type="text" size="4" value ="{$etudiants[row]->note2}"> </td>
+                    <td><input type="text" size="4" value ="{$etudiants[row]->moy}" ></td>
+                    <td><input type = "button" value = "modifier">
+                        <input type = "button" value = "supprimer"></td>
                 </tr>
             {/section}
+
         </tbody>
     </table>             
 

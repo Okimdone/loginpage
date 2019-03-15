@@ -8,13 +8,13 @@
         public $note1 ;
         public $note2 ;
         public $moy ;
-        function __construct($id1,$nom1,$prenom1,$n1,$n2){
-            $id = $id1;   
-            $nom = $nom1;
-            $prenom = $prenom1;
-            $note1 = $n1;
-            $note2 = $n2;
-            $moy = ($n1+$n2)/2 ;
+        function __construct($iden,$nom1,$prenom1,$n1,$n2,$myen){
+            $this->id = $iden;   
+            $this->nom = $nom1;
+            $this->prenom = $prenom1;
+            $this->note1 = $n1;
+            $this->note2 = $n2;
+            $this->moy = $myen ;
         }
 
     } 
@@ -22,15 +22,7 @@
 	 load_note ();
     function load_note () {
 		global $etudiants ;
-        global $f;
-        
-	    if (!file_exists($f)) {
-            fclose( fopen($f, 'w'));
-            return;
-        }
-            
-        
-
+	    global $f;
 	    if ($file = fopen($f, 'r')) {
             while ($line = fgets($file)) { 	
                 $tab = explode(";", trim($line));
@@ -41,10 +33,10 @@
     }
 
     function add_note($nom,$prenom,$note1,$note2){
-        global $f;
-        $etud = new Etudiant($nom,$prenom,$note1,$note2);
-        $ident = 
-	    $add = $nom.';'.$prenom.';'.$note1.';'.$note2.';'.$etud->moy."\n" ;
+	    global $f;
+        $moy = ($note1+$note2)/2;
+        $id = get_id();
+	    $add =$id.';'.$nom.';'.$prenom.';'.$note1.';'.$note2.';'.$moy."\n" ;
 	    if ($file = fopen($f, 'a+')) {
             fputs($file,$add,strlen($add));
             echo "Ajout avec succès!";
@@ -52,13 +44,38 @@
         }    
         else echo "its not working bro !";
     }
-   function modif_note($nom,$prenom){
+    function get_id() {
+        global $f;
+        global $etudiants ;
+        if(count($etudiants) == 0){
+            return 0;
+        }
+        $max = $etudiants[0]->id ;
+        foreach($etudiants as $etudiant){
+            if ($max < $etudiant->id) $max = $etudiant->id;
+        }
+        return $max + 1;
+    }
+
+   function modif_note(){  
 
    }
    function suppr_note(){
 
    }
-   function max_ident(){
-       
+   function get_buttons(){
+       $str = '';
+       $btns = array(
+        1=>'save',
+        2=>'delete',
+        3=>'refresh'
+       );
+  
+       //while(list($k,$v)= each($btns))
+       foreach($btns as $k=>$v){
+           $str.='<input type = "submit" value="'.$v.'" name="btn_'.$k.'" id="btn_'.$k.'"/>';
+       }
+       return $str ;
    }
-?>
+   echo get_buttons() ;
+?>  
