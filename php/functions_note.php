@@ -37,9 +37,10 @@
     */
     function add_note($nom,$prenom,$note1,$note2){
         global $etudiants ;
-        $moy = ($note1+$note2)/2;
+        $moy = ((int)$note1+ (int)$note2)/2;
         $id = get_id();
         $etudiants[$id] = new Etudiant($id,$nom,$prenom,$note1,$note2,$moy);
+        return $id;
     }
 
     /*
