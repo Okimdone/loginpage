@@ -14,8 +14,10 @@
     
     <link rel="stylesheet" href="assets\css\css.css">
     <script src="assets/js/jscript.js"></script>
+    {block name=jscript} {/block}
 </head>
 <body>
+
     {block name=body}{/block}
 
     <!--JavaScript at end of body for optimized loading-->

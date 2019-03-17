@@ -7,7 +7,7 @@
     {
         // Maybe do something with his name later
         $username = $_COOKIE['username'];
-
+        
         require_once("php/functions_note.php");
         $smarty->assign('etudiants', $etudiants);
 
