@@ -1,8 +1,8 @@
 <?php
     // Smarty template s declaration
-    $path = $_SERVER['DOCUMENT_ROOT']."/loginpage" ;//Delete after seeting the loginpage/ as the Document_ROOT
-    
-    require "$path/Smarty/Smarty.class.php";
+    $path = $_SERVER['DOCUMENT_ROOT']."/tests\login" ;//Delete after seeting the loginpage/ as the Document_ROOT
+
+    require "$path\Smarty\Smarty.class.php";
     $smarty = new Smarty();
 
     $smarty->template_dir = "$path/V/templates";
