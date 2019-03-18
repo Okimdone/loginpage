@@ -126,7 +126,7 @@ function ajax_send_data(){
         deleted_list.length  = 0;
         
         var fully_added_rows = JSON.parse(server_s_added_data); 
-        
+        console.log(server_s_added_data);
         //  Loop over the added arrays sent by the server and add each one of them into the table
         Object.keys(fully_added_rows).forEach(function(id){
             /*

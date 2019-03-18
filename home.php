@@ -25,7 +25,16 @@
                 // the id + all the etudian, notes , moy data to the front end 
                 foreach($added_list as $added){
                     $added_id = add_note($added[0], $added[1], $added[2], $added[3]);
-                    $added_etudiants_for_ajax[ $added_id ] = $etudiants[$added_id];
+                    //  The making of the Json object
+                    $etudiant_json = array(
+                        'id'    => $added_id,
+                        'nom'   => $etudiants['nom'][$added_id],
+                        'prenom'=> $etudiants['prenom'][$added_id],
+                        'note1' => $etudiants['note1'][$added_id],
+                        'note2' => $etudiants['note2'][$added_id],
+                        'moy'   => $etudiants['moy'][$added_id]
+                    );
+                    $added_etudiants_for_ajax[ $added_id ] = $etudiant_json;
                 }
             }
             
