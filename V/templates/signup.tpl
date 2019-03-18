@@ -36,7 +36,7 @@
                 <input type="hidden" name="route" value="signup"/>
             </form>
             <div class="account-opt text-center" >
-            	<a class="opt-acc" id="register" href="index.php">Se connecter à un compte existant</a>
+            	<a class="opt-acc readable-txt" id="register" href="index.php">Se connecter à un compte existant</a>
             </div>
         </div>
     </div>

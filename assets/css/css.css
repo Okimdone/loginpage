@@ -6,6 +6,13 @@ body {
 }
 
 /*
+**	Text shadowing for a readable text
+*/
+.readable-txt {
+	text-shadow: 0px 0px 0px #000000;
+}
+
+/*
 **	Background grid with a slightly birghter grey behind the login form
 */
 .login-grid {
@@ -134,4 +141,110 @@ a#register {
  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #82B888 ;
   opacity: 0.8; /* Firefox */
+}
+
+/*
+**	Pop-ups s css
+*/
+.pop-up {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+.inside-popup {
+  margin: 70px auto;
+  padding: 20px;
+  background:  #F2E9DC;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.pop-up h3 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.pop-up label {
+	text-align: left !important;
+	width: 45%;
+}
+
+.pop-up .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+
+  .popup{
+    width: 70%;
+  }
+}
+
+/*
+**	Table css
+*/
+
+#top-bottom-gradient-color {
+	background-image: linear-gradient(to bottom left, #C6DEC8 30% , #b5e2fa );
+}
+
+#div-table {
+	width: 80%;
+	min-width: 500px;
+	margin: 1.5em auto ;
+	background-color: #b5e2fa; 
+}
+
+#div-table td {
+	width: 14%;
+}
+
+#home-thead th{
+	background-color: #0c1b33 ;
+	color: #F2E9DC;
+	text-align: left;
+}
+
+#home-tbody tr:hover {
+	background-color: black;
+}
+
+/*
+**	Loging out css
+*/
+#log-out-div {
+	text-align: end;
+	padding-top: -20; 
+}
+
+#log-out {
+	font-size: 2em;
+}
+
+.margin-top-bot {
+	margin-top: 50px;
+	margin-bottom: 30px;
 }

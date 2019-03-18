@@ -10,6 +10,9 @@ let data = {}
 data['modified_list']=modified_list;
 data['deleted_list'] =deleted_list;
 data['added_list']   =added_list;
+//time interval for the clind side to try and sync with the server-side 
+let time_interval = 1000 * 10;
+setInterval( sync_cli_serv_ajaxcall, time_interval);
 
 $(document).ready(function(){
 /*
@@ -61,6 +64,13 @@ $(document).ready(function(){
         }
         $(table_row_todel).remove();
     });
+
+    /*
+    **  In case the client logged out
+    */
+    $("#log-out").click(function(){
+        sync_cli_serv_ajaxcall();
+    });
 });
 
 /*
@@ -69,7 +79,7 @@ $(document).ready(function(){
 */
 $(document).on('click', '.modif-btn', function() {
     $(".td-" + $(this).val()).attr("contenteditable", "true");
-    $(this).text("Appliquer");
+    $(this).html("<i class=\"material-icons\">save</i>");
     $(this).addClass("save-btn").removeClass("modif-btn");
 });
 
@@ -96,9 +106,12 @@ $(document).on('click', '.save-btn', function(){
     }
     // Save the new list to the global array
     modified_list.push( td_texts.slice(0,5) );
+    // Change the "moyenne"
+    //var tr_children = $(tr_modifier).children();
+    //tr_children[5].text( ((Number(tr_children[3].text()) + Number(tr_children[4].text()))/2 ) );
 
     // Change to state of the button
-    $(this).text("Modifier");
+    $(this).html("<i class=\"material-icons\"> edit</i>");
     $(this).addClass("modif-btn").removeClass("save-btn");
 });
 
@@ -108,15 +121,14 @@ $(document).on('click', '.save-btn', function(){
 */
 function ajax_send_data(){
     return $.post('home.php', { data: data }, function(server_s_added_data) {
-        modified_list = new Array();
-        added_list    = new Array();
-        deleted_list  = new Array();
+        modified_list.length = 0;
+        added_list.length    = 0;
+        deleted_list.length  = 0;
         
         var fully_added_rows = JSON.parse(server_s_added_data); 
-       
+        
         //  Loop over the added arrays sent by the server and add each one of them into the table
         Object.keys(fully_added_rows).forEach(function(id){
-
             /*
             **  the magic that add a line as the first row of the table on "Ajouter"
             */
@@ -128,10 +140,20 @@ function ajax_send_data(){
                 +    "<td class=\"td-" + id + "\" contenteditable='false'>" +   fully_added_rows[id]['note1']   + "</td>"
                 +    "<td class=\"td-" + id + "\" contenteditable='false'>" +   fully_added_rows[id]['note2']   + "</td>"
                 +    "<td class=\"td-" + id + "\" contenteditable='false'>" +   fully_added_rows[id]['moy']     + "</td>"
-                +    "<td width=\"300px\"> <button id=\"del-show\"> Supprimer </button> <button class=\"modif-btn\" value=\"" + id + "\" > Modifier </button></td>"
+                +   "<td>"
+                +   "    <button class=\"waves-light btn-small del-show\" value=" + id +"><i class=\"material-icons\"> delete </i> </button>"
+                +   "    <button class=\"waves-light btn-small modif-btn\" value="+ id +"><i class=\"material-icons\"> edit</i></button>"
+                +   "</td>"
                 +"</tr>"
             );
         
         });
     });
 }
+
+function sync_cli_serv_ajaxcall(){
+    if(modified_list.length ||   deleted_list.length  || added_list.length ) {
+        ajax_send_data();
+    }
+}
+
