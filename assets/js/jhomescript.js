@@ -44,10 +44,6 @@ $(document).ready(function(){
     $("#del-hide").click(function(){
         $("#delete-div").hide();
     });
-    $(".del-show").click(function(){
-        $("#delete-div").show();
-        $("#todel-id").val($(this).val());
-    });
     $("#del-submit").click(function(){
         $("#delete-div").hide();
         var todel_id = $("#todel-id").val();
@@ -73,6 +69,13 @@ $(document).ready(function(){
     });
 });
 
+/*
+**  On click show delete popup
+*/
+$(document).on('click', ".del-show", function(){
+        $("#delete-div").show();
+        $("#todel-id").val($(this).val());
+    });
 /*
 **  Magic that takes care of Making table elements editable
 **  and saving them as arrays into the  <modified_list> array
@@ -126,14 +129,13 @@ function ajax_send_data(){
         deleted_list.length  = 0;
         
         var fully_added_rows = JSON.parse(server_s_added_data); 
-        console.log(server_s_added_data);
         //  Loop over the added arrays sent by the server and add each one of them into the table
         Object.keys(fully_added_rows).forEach(function(id){
             /*
             **  the magic that add a line as the first row of the table on "Ajouter"
             */
-            $('table tr:first').after(
-                "<tr>\n"
+            $('tbody tr:first').before(
+                "<tr id=\"tr-" + id +"\" >\n"
                 +    "<td class=\"td-" + id + "\" contenteditable='false'>" +   id     + "</td>"
                 +    "<td class=\"td-" + id + "\" contenteditable='false'>" +   fully_added_rows[id]['nom']     + "</td>"
                 +    "<td class=\"td-" + id + "\" contenteditable='false'>" +   fully_added_rows[id]['prenom']  + "</td>"

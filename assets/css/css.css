@@ -154,11 +154,6 @@ a#register {
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-  visibility: visible;
-  opacity: 1;
 }
 
 .inside-popup {
@@ -168,7 +163,6 @@ a#register {
   border-radius: 5px;
   width: 30%;
   position: relative;
-  transition: all 5s ease-in-out;
 }
 
 .pop-up h3 {
