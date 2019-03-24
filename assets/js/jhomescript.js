@@ -73,9 +73,10 @@ $(document).ready(function(){
 **  On click show delete popup
 */
 $(document).on('click', ".del-show", function(){
-        $("#delete-div").show();
-        $("#todel-id").val($(this).val());
-    });
+    $("#delete-div").show();
+    $("#todel-id").val($(this).val());
+});
+
 /*
 **  Magic that takes care of Making table elements editable
 **  and saving them as arrays into the  <modified_list> array
@@ -127,7 +128,6 @@ function ajax_send_data(){
         modified_list.length = 0;
         added_list.length    = 0;
         deleted_list.length  = 0;
-        
         var fully_added_rows = JSON.parse(server_s_added_data); 
         //  Loop over the added arrays sent by the server and add each one of them into the table
         Object.keys(fully_added_rows).forEach(function(id){

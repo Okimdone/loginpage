@@ -56,14 +56,14 @@
             </tr>
         </thead>
         <tbody>
-            {foreach from=$etudiants['id'] item=etudiant key=id name=name}
+            {foreach from=$etudiants item=etudiant key=id name=name}
                 <tr id="tr-{$id}">
                     <td class="td-{$id}" contenteditable='false'>{$id}</td>
-                    <td class="td-{$id}" contenteditable='false'>{$etudiants['nom'].$id}</td>
-                    <td class="td-{$id}" contenteditable='false'>{$etudiants['prenom'].$id}</td>
-                    <td class="td-{$id}" contenteditable='false'>{$etudiants['note1'].$id}</td>
-                    <td class="td-{$id}" contenteditable='false'>{$etudiants['note2'].$id}</td>
-                    <td class="td-{$id}" contenteditable='false'>{$etudiants['moy'].$id}</td>
+                    <td class="td-{$id}" contenteditable='false'>{$etudiant->nom}</td>
+                    <td class="td-{$id}" contenteditable='false'>{$etudiant->prenom}</td>
+                    <td class="td-{$id}" contenteditable='false'>{$etudiant->note1}</td>
+                    <td class="td-{$id}" contenteditable='false'>{$etudiant->note2}</td>
+                    <td class="td-{$id}" contenteditable='false'>{$etudiant->moy}</td>
                     <td>
                         <button class="waves-light btn-small del-show" value="{$id}"><i class="material-icons"> delete </i> </button> 
                         <button class="waves-light btn-small modif-btn" value="{$id}" ><i class="material-icons"> edit</i></button>

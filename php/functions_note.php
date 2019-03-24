@@ -1,20 +1,23 @@
 <?php
     $f = 'data/note_users.csv';
-    $id = array() ; 
-    $nom = array() ;
-    $prenom = array() ;
-    $note1 = array() ;
-    $note2 = array() ;
-    $moy = array() ;
+    $etudiants =  array();
+    class Etudiant{
+        public $id ; 
+        public $nom ;
+        public $prenom ;
+        public $note1 ;
+        public $note2 ;
+        public $moy ;
+        function __construct($iden,$nom1,$prenom1,$n1,$n2,$myen){
+            $this->id = $iden;   
+            $this->nom = $nom1;
+            $this->prenom = $prenom1;
+            $this->note1 = $n1;
+            $this->note2 = $n2;
+            $this->moy = $myen ;
+        }
+    } 
 
-    $etudiants =  array(
-        'id' => $id,
-        'nom'=> $nom,
-        'prenom'=>$prenom,
-        'note1' => $note1,
-        'note2' => $note2,
-        'moy'   => $moy
-    );
 
      
 
@@ -25,12 +28,7 @@
 	    if ($file = fopen($f, 'r')) {
             while ($line = fgets($file)) { 	
                 $tab = explode(";", trim($line));
-                $etudiants['id'][$tab[0]]      = $tab[0];
-                $etudiants['nom'][$tab[0]]     = $tab[1];
-                $etudiants['prenom'][$tab[0]]  = $tab[2];
-                $etudiants['note1'][$tab[0]]   = $tab[3];
-                $etudiants['note2'][$tab[0]]   = $tab[4];
-                $etudiants['moy'][$tab[0]]     = $tab[5];
+                $etudiants[$tab[0]] = new Etudiant($tab[0],$tab[1],$tab[2],$tab[3],$tab[4],$tab[5]);
             }
             fclose($file);
 	    }
@@ -43,12 +41,7 @@
         global $etudiants ;
         $moy = ((int)$note1+ (int)$note2)/2;
         $id = get_id();
-        $etudiants['id'][$id]      = $id;
-        $etudiants['nom'][$id]     = $nom;
-        $etudiants['prenom'][$id]  = $prenom;
-        $etudiants['note1'][$id]   = $note1;
-        $etudiants['note2'][$id]   = $note2;
-        $etudiants['moy'][$id]     = $moy;
+        $etudiants[$id] = new Etudiant($id,$nom,$prenom,$note1,$note2,$moy);
         return $id;
     }
 
@@ -61,8 +54,8 @@
         global $f;
         if ($file = fopen($f, 'w')){
             ftruncate($file, 0);
-            foreach($etudiants['id'] as $id){
-                $line = $id.';'.$etudiants['nom'][$id].';'.$etudiants['prenom'][$id].';'.$etudiants['note1'][$id].';'.$etudiants['note2'][$id].';'.$etudiants['moy'][$id]."\n"; 
+            foreach($etudiants as $etudiant){
+                $line = $etudiant->id.';'.$etudiant->nom.';'.$etudiant->prenom.';'.$etudiant->note1.';'.$etudiant->note2.';'.$etudiant->moy."\n"; 
                 fputs($file,$line ,strlen($line));
             }
         } 
@@ -78,9 +71,9 @@
         if(count($etudiants) == 0){
             return 0;
         }
-        $max = $etudiants['id'][0] ;
-        foreach($etudiants['id'] as $id){
-            if ($max < $id) $max = $id;
+        $max = $etudiants[0]->id ;
+        foreach($etudiants as $etudiant){
+            if ($max < $etudiant->id) $max = $etudiant->id;
         }
         return $max + 1;
     }
@@ -89,13 +82,16 @@
     **modifier les donnés d'un etudiant selon son id 
     */
     function modif_note($id,$nom,$prenom,$note1,$note2){
-        global $etudiants ;
-        $moy = ($note1+$note2)/2;
-        $etudiants['nom'][$id]      = $nom;
-        $etudiants['prenom'][$id]   = $prenom;
-        $etudiants['note1'][$id]    = $note1;
-        $etudiants['note2'][$id]    = $note2;
-        $etudiants['moy'][$id]      = $moy;
+        // If id is registered ex
+        if(isset($etudiant[$id]->id)){
+            global $etudiants ;
+            $moy = ($note1+$note2)/2;
+            $etudiants[$id]->nom = $nom;
+            $etudiants[$id]->prenom = $prenom;
+            $etudiants[$id]->note1 = $note1;
+            $etudiants[$id]->note2 = $note2;
+            $etudiants[$id]->moy = $moy;
+        }
    }
    
    /*
@@ -103,12 +99,7 @@
    */
     function suppr_note($iden){
         global $etudiants ;
-        if(isset($etudiants['id'][$iden])){
-            unset($etudiants['id'][$iden]);
-            unset($etudiants['nom'][$iden]);
-            unset($etudiants['prenom'][$iden]);
-            unset($etudiants['note1'][$iden]);
-            unset($etudiants['note2'][$iden]);
-            unset($etudiants['moy'][$iden]);
-        } 
+        if(isset($etudiants[$iden])){
+            unset($etudiants[$iden]);
+         } 
     } 
