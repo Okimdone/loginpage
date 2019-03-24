@@ -112,4 +112,3 @@
             unset($etudiants['moy'][$iden]);
         } 
     } 
-?>  

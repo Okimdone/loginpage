@@ -6,7 +6,7 @@
     if (isset($_COOKIE['login_cookie']))
     {
         // Maybe do something with his name later
-        $username = $_COOKIE['username'];
+        $username = $_COOKIE['login_cookie'];
         
         require_once("php/functions_note.php");
         //if there is any AJAX request to post/get data
