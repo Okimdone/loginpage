@@ -24,8 +24,8 @@
                 <input type="hidden" name="route" value="login"/>
             </form>
             <div class="account-opt">
-            	<a class="opt-acc" id="forgoten" href="recover.php">Mot de passe oublié ?</a>
-            	<a class="opt-acc" id="register" href="enregistrer.php">Créer un compte</a>
+            	<a class="opt-acc readable-txt" id="forgoten" href="recover.php">Mot de passe oublié ?</a>
+            	<a class="opt-acc readable-txt" id="register" href="enregistrer.php">Créer un compte</a>
             </div>
         </div>
     </div>
