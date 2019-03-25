@@ -10,10 +10,10 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      
     <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="V/assets/css/materialize.min.css"  media="screen,projection"/>
     
-    <link rel="stylesheet" href="assets\css\css.css">
-    <script src="assets/js/jscript.js"></script>
+    <link rel="stylesheet" href="V/assets/css/css.css">
+    <script src="V/assets/js/jscript.js"></script>
     {block name=jscript} {/block}
 </head>
 <body>
@@ -21,6 +21,6 @@
     {block name=body}{/block}
 
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+    <script type="text/javascript" src="V/assets/js/materialize.min.js"></script>
 </body>
 </html>

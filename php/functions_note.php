@@ -82,9 +82,9 @@
     **modifier les donnés d'un etudiant selon son id 
     */
     function modif_note($id,$nom,$prenom,$note1,$note2){
+        global $etudiants ;
         // If id is registered ex
-        if(isset($etudiant[$id]->id)){
-            global $etudiants ;
+        if(isset($etudiants[$id])){
             $moy = ($note1+$note2)/2;
             $etudiants[$id]->nom = $nom;
             $etudiants[$id]->prenom = $prenom;

@@ -11,7 +11,7 @@ data['modified_list']=modified_list;
 data['deleted_list'] =deleted_list;
 data['added_list']   =added_list;
 //time interval for the clind side to try and sync with the server-side 
-let time_interval = 1000 * 10;
+let time_interval = 1000 * 2;
 setInterval( sync_cli_serv_ajaxcall, time_interval);
 
 $(document).ready(function(){

@@ -1,8 +1,8 @@
 {extends file="layout.tpl"}
 {block name=title}Home{/block}
 {block name=jscript}
-    <script src="assets/js/jquery.min2.js"></script>
-    <script src="assets/js/jhomescript.js"> </script>    
+    <script src="V/assets/js/jquery.min2.js"></script>
+    <script src="V/assets/js/jhomescript.js"> </script>    
 {/block}
 {block name=body}
 
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div id="log-out-div">
-        <a href="logout.php" id="log-out"><img src="assets/img/logout.png" alt="Log Out" height="50" width="50"></a>
+        <a href="logout.php" id="log-out"><img src="V/assets/img/logout.png" alt="Log Out" height="50" width="50"></a>
     </div>
     <div id="div-table">
     <div id="top-bottom-gradient-color">
