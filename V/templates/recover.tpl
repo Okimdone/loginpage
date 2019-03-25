@@ -8,6 +8,7 @@
         <h1 class="text-center"></h1>
         <div class="form-div">
             <form action="recover.php" method="post">
+                {assign var='fist_step' value=$title|default:FALSE}
                 {if $fist_step eq TRUE}
                     <input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="Nom d'utilisateur" required > 
                     {if $uname_not_exists eq TRUE}

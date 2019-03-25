@@ -11,6 +11,7 @@
                 	<input class="form-control margin-bottom" name="uname" id="uname"  type="text" placeholder="Nom d'utilisateur" required > 
                 	<input class="form-control" name= "passwd" id="passwd"   type="password" placeholder="Password"required>
                 </div>
+                {assign var='badlogin' value=$title|default:FALSE}
                 {if $badlogin eq TRUE}
                     <div id="error-msg">
                         Nom d'utilisateur ou mot de passe incorrect. 

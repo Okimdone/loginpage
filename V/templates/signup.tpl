@@ -11,6 +11,7 @@
                 <Label>
                     Nom d'utilisateur*: 
                     <input type="text" name="uname" id="uname" required>
+                    {assign var='uname_exists' value=$title|default:FALSE}
                     {if $uname_exists eq TRUE}
                         <div id="error-msg">
                             Ce nom d'utilisateur est déjà utilisé. Essayez un autre nom.
@@ -24,6 +25,7 @@
                 <label>
                     Confirmer*:
                     <input type="password" name="confpasswd" id="confpasswd" required>
+                    {assign var='no_conf_pass' value=$title|default:FALSE}
                     {if $no_conf_pass eq TRUE}
                         <div id="error-msg">
                             Confirmez votre mot de passe.
