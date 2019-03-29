@@ -55,9 +55,9 @@
                         $smarty->assign('no_conf_pass', TRUE);
                     } 
                     else  { // Change the password in the csv file and then go to the congratulation step
-                        session_start();                        
+                        
                         //Change the pass
-                        change_pass_for_user($_SESSION['uname'], $_POST['passwd']);
+                        modify($_SESSION['uname'], $_POST['passwd']);
                         session_destroy();
                         //go to the next page (congratulation step)
                         $smarty->assign('end_step', TRUE);
