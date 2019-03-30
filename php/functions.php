@@ -3,33 +3,36 @@
     $f_passwd = '../data/passwd.csv';
     $f_shadow = '../data/shadow.csv';
     $f_groups = '../data/group.csv';
+    $f_log    = '../data/var/logins.log';
 
     // Tests
     $etudiants = new Logins;
     //$etudiants->load_csv();
     var_dump($etudiants->logins[1]);
-    $etudiants->modify_login(["id" => 1 ,"nom" => "ññññññññ","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "haha@gmail.com"]);
+    $etudiants->modify_login("ach1", ["id" => 1 ,"nom" => "my Name Here","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "hahua@gmail.com"]);
     var_dump($etudiants->logins[1]);
-    $etudiants->add_login(["uname" => "ach2222","grp" => "0", "nom" => "zzzzzzzzzz","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "haha@gmail.com"]);
-    //$etudiants->delete_login(1);
+    $etudiants->add_login("ach1", ["uname" => "newadmin,","grp" => "0", "nom" => "damnit","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "awdi@gmail.com"]);
+    var_dump($etudiants->logins[1]);
+    $etudiants->delete_login("ach1", 1);
     $etudiants->enregistre();
     var_dump($etudiants->logins[1]);
 
     /**
-     * Main class This class has an array of refereces of type : User and Prof
+     * the Main class, This class has an array of refereces of type : User and Prof
      * it also has a public interface for interacting with the main Logins Array consisting of :
      * Load_csv()  : Read the passwd & shadow files into The "logins" array
      * enregistre(): Writes into the passwd & shadow files the contents of the "logins" array
      * uname_exists() : checks if an entery with the given username is exists
      * islogin() : checks if the -login-passwd- pair is a valid login
+     * add_login() : takes an associative array as an argument with its values as the properties of the new User object to add 
      * modify_login() : takes an associative array as argument with its key as the properties to change and value as the new value to be saved
      * delete_login() : Deletes the given $id s entery from the logins array
      */
     class Logins {
         // Logins
-        public $logins = array();
+        static public $logins = array();
         // Groups
-        public $groups = array();
+        static public $groups = array();
 
         public function __construct() {
             $this->load_csv();
@@ -69,15 +72,17 @@
                         $this->logins[$tab[0]]->passwd = $tab[2]; 
                 }
 
-                fclose($file_p);fclose($file_sh);
+                fclose($file_p);fclose($file_sh);fclose($file_grp);
             } 
+            else {
+                die("fopen error error");
+            }
         }
 
         // Saves the logins array from RAM into the hard disk drive
         public function enregistre(){
             global $f_passwd, $f_shadow;
-            if(($file_p = fopen($f_passwd, 'w') ) AND ($file_sh = fopen($f_shadow, 'w') )) {
-                ftruncate($file_p, 0);ftruncate($file_sh, 0);
+            if(($file_p = fopen($f_passwd, 'w+') ) AND ($file_sh = fopen($f_shadow, 'w+') )) {
                 foreach($this->logins as $id => $login){
                     // Wrtie into passwdfile
                     $line = $id . ';'.$login->grp . ';'.$login->uname . ';' . ((isset($login->passwd))?'x;':'*;')
@@ -88,6 +93,7 @@
                     $line = $id . ';'.$login->uname . ';'. $login->passwd . "\n"; 
                     fputs($file_sh,$line ,strlen($line));
                 }
+                fclose($file_p);fclose($file_sh);
             } 
             else die("eregistre() error");
         }
@@ -113,7 +119,10 @@
         }
         
         // Adds an entery into the logins table
-        public function add_login($login_array){
+        public function add_login($who, $login_array){
+            if( !($who_id = $this->uname_exists($who)) OR ($this->logins[$who_id]->grp !== $this->groups['admin']) ) 
+                die("Not enough permissions");
+
             if( isset($login_array) AND 
                 isset($login_array['uname']) AND
                 !$this->uname_exists($login_array["uname"]) AND isset($login_array["passwd"]) AND isset($login_array["grp"])
@@ -132,19 +141,27 @@
                                                   , $login_array["nom"], $login_array["prenom"]
                                                   , $login_array["email"], $this->cryptthis($login_array["passwd"]));
                 }
-                return TRUE;
+                $this->log_save($who, " ADDED ".json_encode( $this->logins[$id] ));
+                return $id;
             }
             return FALSE;
         }
 
         // Take an array of changes to make and makes them if it could
-        public function modify_login($login_array) {
+        public function modify_login($who, $login_array) {
+            if( !($who_id = $this->uname_exists($who)) OR ($this->logins[$who_id]->grp !== $this->groups['admin']) ) 
+                die("Not enough permissions");
+
             if( isset($login_array) AND 
                 isset($login_array['id']) AND
                 isset($this->logins[ $login_array["id"] ])
                 )
             {
                 $id = $login_array['id'];
+                
+                //  User by log_save() to save the old state of the login
+                $old_login =  json_encode( $this->logins[$id] );
+
                 //  Get the keys of the array
                 $keys = array_keys($login_array); 
             
@@ -177,14 +194,20 @@
                             break;
                     }
                 }
-                return TRUE;
+
+                $this->log_save($who, " MODIFED " . $old_login ." ==> ". json_encode($this->logins[$id]) );
+                return $id;
             }
             return FALSE;
         }
 
         // Delete an entery in the Logins
-        public function delete_login($id){
+        public function delete_login($who, $id){
+            if( !($who_id = $this->uname_exists($who)) OR ($this->logins[$who_id]->grp !== $this->groups['admin']) ) 
+                die("Not enough permissions");
+
             if (isset($this->logins[$id]) ) {
+                $this->log_save($who, " DELETED ".json_encode( $this->logins[$id] ));
                 unset($this->logins[$id]);
                 return TRUE;
             }
@@ -217,6 +240,16 @@
             return  $hack;
         }
 
+        // Log the changes made to the logins array
+        private function log_save($who, $message) {
+            global $f_log;
+            $date = date(DATE_RFC2822);
+
+            if( ($file_lg = fopen($f_log, 'a') ) ) {
+                fwrite($file_lg, "$date $who $message\n");
+                fclose($file_lg);
+            }
+        }
     }
 
     /*
