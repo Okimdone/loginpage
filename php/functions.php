@@ -11,7 +11,8 @@
     var_dump($etudiants->logins[1]);
     $etudiants->modify_login("ach1", ["id" => 1 ,"nom" => "my Name Here","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "hahua@gmail.com"]);
     var_dump($etudiants->logins[1]);
-    $etudiants->add_login("achh", ["uname" => "newadmin","grp" => "0", "nom" => "damnit","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "awdi@gmail.com"]);
+    $etudiants->add_login("ach1", ["uname" => "newadmin,","grp" => "0", "nom" => "damnit","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "awdi@gmail.com"]);
+    var_dump($etudiants->logins[1]);
     $etudiants->delete_login("ach1", 1);
     $etudiants->enregistre();
     var_dump($etudiants->logins[1]);
