@@ -1,21 +1,9 @@
 <?php 
     //Files storing the username s information and his password
-    $f_passwd = '../data/passwd.csv';
-    $f_shadow = '../data/shadow.csv';
-    $f_groups = '../data/group.csv';
-    $f_log    = '../data/var/logins.log';
-
-    // Tests
-    $etudiants = new Logins;
-    //$etudiants->load_csv();
-    var_dump($etudiants->logins[1]);
-    $etudiants->modify_login("ach1", ["id" => 1 ,"nom" => "my Name Here","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "hahua@gmail.com"]);
-    var_dump($etudiants->logins[1]);
-    $etudiants->add_login("ach1", ["uname" => "newadmin,","grp" => "0", "nom" => "damnit","class" => "classXXX","passwd" => "123", "prenom" => "pixel", "email" => "awdi@gmail.com"]);
-    var_dump($etudiants->logins[1]);
-    $etudiants->delete_login("ach1", 1);
-    $etudiants->enregistre();
-    var_dump($etudiants->logins[1]);
+    $f_passwd = $_SERVER['DOCUMENT_ROOT'] . '/data/passwd.csv';
+    $f_shadow = $_SERVER['DOCUMENT_ROOT'] . '/data/shadow.csv';
+    $f_groups = $_SERVER['DOCUMENT_ROOT'] . '/data/group.csv';
+    $f_log    = $_SERVER['DOCUMENT_ROOT'] . '/data/var/logins.log';
 
     /**
      * the Main class, This class has an array of refereces of type : User and Prof
@@ -30,13 +18,27 @@
      */
     class Logins {
         // Logins
-        static public $logins = array();
+        public $logins = array();
         // Groups
-        static public $groups = array();
+        public $groups = array();
 
-        public function __construct() {
+        // Singleton Pattern this functions returns one instance of the logins 
+        public static function GetInstance() {
+            static $inst = null;
+            if ($inst === null) {
+                $inst = new Logins;
+            }
+            return $inst;
+        }
+
+        //  Disabling the usage of magic methods
+        private function __construct() {
             $this->load_csv();
         }        
+
+        private function __clone(){
+
+        }
 
         // Load the database-file into RAM 
         public function load_csv () {
@@ -75,7 +77,7 @@
                 fclose($file_p);fclose($file_sh);fclose($file_grp);
             } 
             else {
-                die("fopen error error");
+                die("fopen error");
             }
         }
 
@@ -120,8 +122,10 @@
         
         // Adds an entery into the logins table
         public function add_login($who, $login_array){
-            if( !($who_id = $this->uname_exists($who)) OR ($this->logins[$who_id]->grp !== $this->groups['admin']) ) 
-                die("Not enough permissions");
+            if( !($who_id = $this->uname_exists($who)) OR ($this->logins[$who_id]->grp !== $this->groups['admin']) ) { 
+                echo("Not enough permissions");
+                return FALSE;
+            }
 
             if( isset($login_array) AND 
                 isset($login_array['uname']) AND
@@ -249,6 +253,10 @@
                 fwrite($file_lg, "$date $who $message\n");
                 fclose($file_lg);
             }
+        }
+        
+        public function encode() {
+                $this->log_save($who, " ADDED ".json_encode( $this->logins ));
         }
     }
 
