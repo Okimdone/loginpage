@@ -1,0 +1,8 @@
+Sat, 30 Mar 2019 20:58:53 +0000 ach2  ADDED {"id":35,"nom":"achraf","prenom":"bougadre","class":"class1","note1":11,"note2":12}
+Sat, 30 Mar 2019 20:59:36 +0000 ach3  ADDED {"id":36,"nom":"achraf","prenom":"bougadre","class":"class2","note1":11,"note2":12}
+Sat, 30 Mar 2019 21:00:37 +0000 ach3  ADDED {"id":37,"nom":"achraf","prenom":"bougadre","class":"class2","note1":11,"note2":12}
+Sun, 31 Mar 2019 01:00:28 +0000 ach3  ADDED {"id":30,"nom":"achraf","prenom":"bougadre","class":"class2","note1":11,"note2":12}
+Sun, 31 Mar 2019 01:00:39 +0000 ach3  ADDED {"id":31,"nom":"achraf","prenom":"bougadre","class":"class2","note1":11,"note2":12}
+Sun, 31 Mar 2019 03:21:06 +0000 ach3  ADDED {"id":32,"nom":"achraf","prenom":"bougadre","class":"class2","note1":11,"note2":12}
+Sun, 31 Mar 2019 03:21:58 +0000 ach3  ADDED {"id":32,"nom":"achraf","prenom":"bougadre","class":"class2","note1":11,"note2":12}
+Sun, 31 Mar 2019 03:36:05 +0000 ach3  DELETED {"id":"31","nom":"achraf","prenom":"bougadre","class":"class2","note1":"11","note2":"12"}
