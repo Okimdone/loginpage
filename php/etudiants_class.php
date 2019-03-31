@@ -106,7 +106,7 @@
                 $this->etudiants[$id]->note2 = $etudiant_array['note2'];
                 
                 //  Log the changes
-                $this->log_save($who, " MODIFED " . $old_etudiant ." ==> ". json_encode($this->etudiants[$id]); 
+                $this->log_save($who, " MODIFED " . $old_etudiant ." ==> ". json_encode($this->etudiants[$id])); 
                 return $id;
             }
             echo "Invalide Modification";
