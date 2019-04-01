@@ -1,0 +1,57 @@
+[
+    {
+        "name": "lindelius/php-jwt",
+        "version": "0.8.1",
+        "version_normalized": "0.8.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/lindelius/php-jwt.git",
+            "reference": "c54ca7609b63738a818c3a140e54a4591139971b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/lindelius/php-jwt/zipball/c54ca7609b63738a818c3a140e54a4591139971b",
+            "reference": "c54ca7609b63738a818c3a140e54a4591139971b",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "ext-openssl": "*",
+            "php": "^7.1",
+            "phpbench/phpbench": "^0.14",
+            "phpunit/phpunit": "^7.0"
+        },
+        "time": "2019-03-01T23:00:55+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Lindelius\\JWT\\": "src/"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Tom Lindelius",
+                "homepage": "https://lindelius.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Convenience library for working with JSON Web Tokens (JWT) in PHP",
+        "homepage": "https://github.com/lindelius/php-jwt",
+        "keywords": [
+            "helpers",
+            "jwt",
+            "php"
+        ]
+    }
+]
