@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+/*
+ *  SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long;
+ *  to solve https://laravel-news.com/laravel-5-4-key-too-long-error/
+ */
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /*
+        *  SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long;
+        *  to solve https://laravel-news.com/laravel-5-4-key-too-long-error/
+        */
+        Schema::defaultStringLength(191);
     }
 }

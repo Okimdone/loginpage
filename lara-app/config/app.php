@@ -175,6 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         *  Me adding the jwt service provider :: https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
+         */
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
     ],
 
     /*
