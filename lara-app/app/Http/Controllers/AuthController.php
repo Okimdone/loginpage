@@ -24,10 +24,14 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['email', 'password']);
-
+        $credentials = request(['name', 'password']);
+        // Get some user from somewhere
+        $user = \App\compte::first();
+echo $user;
+        // Get the token
+        $token = auth()->login($user);
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => "Unauthorized"], 403);
         }
 
         return $this->respondWithToken($token);

@@ -1,5 +1,0 @@
-{
-    "require": {
-        "lindelius/php-jwt": "^0.8.1"
-    }
-}

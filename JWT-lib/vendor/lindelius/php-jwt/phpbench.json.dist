@@ -1,7 +1,0 @@
-{
-    "bootstrap": "vendor/autoload.php",
-    "output_mode": "time",
-    "path": "benchmarks",
-    "retry_threshold": 5,
-    "time_unit": "milliseconds"
-}
