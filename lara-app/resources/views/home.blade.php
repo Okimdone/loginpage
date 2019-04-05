@@ -7,10 +7,12 @@
             <h1>Home</h1>
             <div>
                 <h4> add professeur</h4>
-                {{ $token }}
             </div>
             <div>
+                <pre>
 
+                    {{$user}}
+                </pre>
             </div>
             <div>
 

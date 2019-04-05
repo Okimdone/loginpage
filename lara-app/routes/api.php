@@ -1,20 +1,5 @@
 <?php
-//  New api jwt Auth
-Route::group([
 
-], function ($router) {
-
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
-
-});
-
-
-/* OLD
-use Illuminate\Http\Request;
-*/
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,6 +10,19 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:api')->get('/compte', function (Request $request) {
-    return $request->compte();
+/*  Route::middleware('auth:api')->get('/compte', function (Request $request) {
+ *    return $request->compte();
+ });
+*/
+//  New api jwt Auth
+
+use Illuminate\Http\Request;
+
+Route::post('register', 'UserController@register');
+Route::post('login', 'UserController@authenticate');
+Route::get('open', 'DataController@open');
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('closed', 'DataController@closed');
 });

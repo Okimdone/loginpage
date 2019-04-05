@@ -11,5 +11,6 @@
 |
 */
 
-Route::get('/', 'LoginController@welcome' );
-
+Route::get('/', 'DataController@loginpage' );
+Route::get('/register', 'DataController@registerpage');
+Route::get('/home','DataController@homepage');
