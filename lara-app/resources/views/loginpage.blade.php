@@ -7,8 +7,8 @@
 
             <h1>Login</h1>
             <div>
-                <form action="/api/login" method="post">
-                    <!-- {{ csrf_field() }} -->
+                <form action="/login" method="post">
+                    {{ csrf_field() }}
                     <input type="text" name="uname" id="uname"> <br>
                     <input type="password" name="password" id="password"> <br>
                     <button type="submit">submit</button>

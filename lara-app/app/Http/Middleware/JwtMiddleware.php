@@ -7,6 +7,8 @@
     use Exception;
     use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
+    use Illuminate\Http\Request;
+
     class JwtMiddleware extends BaseMiddleware
     {
 

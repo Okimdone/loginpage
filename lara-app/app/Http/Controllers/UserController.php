@@ -22,9 +22,8 @@
             } catch (JWTException $e) {
                 return response()->json(['error' => 'could_not_create_token'], 500);
             }
-            $response = new \Illuminate\Http\Response(view('home', ['user' => $token]));
-            $response->cookie('jwt', $token, 15);
-            return $response;
+
+            return response()->json(compact('token'))->header('Authorization', 'bearer '.$token);
         }
 
         public function register(Request $request)
@@ -53,27 +52,23 @@
 
         public function getAuthenticatedUser()
             {
-                    try {
-
-                            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                                    return response()->json(['user_not_found'], 404);
-                            }
-
-                    } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-                            return response()->json(['token_expired'], $e->getStatusCode());
-
-                    } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
-                            return response()->json(['token_invalid'], $e->getStatusCode());
-
-                    } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-
-                            return response()->json(['token_absent'], $e->getStatusCode());
-
+                try {
+                    if (! $user = JWTAuth::parseToken()->authenticate()) {
+                        return response()->json(['user_not_found'], 404);
                     }
+                } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
 
-            $request->cookie('jwt', $token, 15);
-                    return response()->json(compact('user'));
+                        return response()->json(['token_expired'], $e->getStatusCode());
+
+                } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+                        return response()->json(['token_invalid'], $e->getStatusCode());
+
+                } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+                        return response()->json(['token_absent'], $e->getStatusCode());
+
+                }
+                return response($user->id);//->json(compact('user'));
             }
     }

@@ -10,7 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Http\Request;
 
-Route::get('/', 'DataController@loginpage' );
-Route::get('/register', 'DataController@registerpage');
-Route::get('/home','DataController@homepage');
+Route::post('login', 'UserController@authenticate');
+
+Route::group(['middleware' => ['jwt.redirect']], function() {
+    Route::get('/', 'DataController@loginpage');
+});
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('closed', 'DataController@closed');
+});
