@@ -25,6 +25,6 @@
             } catch (Exception $e) {
                 return new Response(view('loginpage'));
             }
-            return new Response(view('home', ['user' => $user]));
+            return $next($request);
         }
     }

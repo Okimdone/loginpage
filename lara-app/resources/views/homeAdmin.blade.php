@@ -1,8 +1,10 @@
-<!doctype html>
-<html>
-    <head>
-    </head>
-    <body>
+@extends('layout')
+
+@section('title')
+    Login - Page
+@endsection
+
+@section('body')
         <div class="flex-center position-ref full-height">
             <h1>Home</h1>
             <div>

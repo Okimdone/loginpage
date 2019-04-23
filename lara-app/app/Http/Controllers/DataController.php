@@ -10,28 +10,32 @@
     use Tymon\JWTAuth\Exceptions\JWTException;
 
 
-//    use JWTAuth;
-//    use Illuminate\Http\Request;
- //   use Cookie;
     class DataController extends Controller
     {
         public function homepage(Request $request) {
             //$data = \App\Type_compte::all();
 
            $user = JWTAuth::parseToken()->authenticate();
-            //hasAccess('jwt');
+
+
+            $type_compte = \App\Type_compte::find($user->id_type_compte)->type ;//->get('id')->first()->id;
+
+
+            if( $type_compte === "admin" ) {
+
+                return view('homeAdmin',[]);
+            } elseif ($type_compte === "professeur") {      // For Profs
+
+                $modules = \App\Module::where('id_prof', $user->id)->get('module');
+                $nom_prof= \App\Enseignant::find($user->id)->nom;
+
+                return view('homeProf',['modules' => $modules, 'nom_prof' => $nom_prof]);
+            } elseif ($type_compte === "etudiant") {
+                return view('homeEtudiant',[]);
+            } else {
+                # code...
+            }
             return view('home',[/*'data' => $data,*/ 'user' => '22'/*var_dump($user)*/]);
-        }
-
-        public function loginpage()
-        {
-            return  view('loginpage')->render();
-        }
-
-        public function closed()
-        {
-            $data = "Only authorized users can see this";
-            return response()->json(compact('data'),200);
         }
 
         public function syncData(Request $request){
@@ -39,9 +43,25 @@
            $loggedUser = JWTAuth::parseToken()->authenticate();
            $type_compte = \App\Type_compte::where('id', $loggedUser->id_type_compte)->get('type')->first()->type;
 
-            // what the data json is supposed to look like : {"added_list" : [] , "modified_list" : [], "deleted_list" : [] }
-            $data = $request->get('data');
-            $data = json_decode($data);
+           // what the data json is supposed to look like : {"added_list" : [] , "modified_list" : [], "deleted_list" : [] }
+            // Casting everything to object to respect the format above
+            $data = (object) $request->get('data');
+            if(isset($data->added_list)){
+                foreach($data->added_list as &$added_array){
+                    $added_array = (object) $added_array;
+                }
+            }
+            if(isset($data->modified_list)){
+                foreach($data->modified_list as &$modif_array){
+                    $modif_array = (object) $modif_array;
+                }
+            }
+            if(isset($data->deleted_list)){
+                foreach($data->deleted_list as &$todel_array){
+                    $todel_array = (object) $todel_array;
+                }
+            }
+
 
            switch ($type_compte) {
                case 'admin':
@@ -209,6 +229,7 @@
                case 'professeur':
                     // Works with a Json object of this form
                     // {"added_list" : [{"nom":  "achraf", "prenom":"bougadre", "cne":"123456", "note": 12.25, "id_module": 3 }] , "modified_list" : [], "deleted_list" : [] }
+                    $added_id = array();
                     if (isset($data->added_list)) {
                         foreach($data->added_list as $toAdd){
                             try {
@@ -239,6 +260,8 @@
                                 $note->save();
 
                                 \DB::commit();
+
+                                $added_id[] = $user->id;
                             } catch (Exception $e) {
                                 \DB::rollBack();
                             }
@@ -313,14 +336,27 @@
                             }
                         }
                     }
+                    return $added_id;
                break;
            }
            return;
         }
 
-
-        protected function hasAccess(){
-
+        public function getNotes(Request $request) {
+            if($request->ajax()){
+                $loggedProf = JWTAuth::parseToken()->authenticate();
+                $id_module = \App\Module::where('module', $request->get('module'))
+                                        ->where('id_prof', $loggedProf->id)
+                                        ->first()->id;
+                $items = \DB::table('notes')
+                ->where(['notes.id_prof' => $loggedProf->id, 'notes.id_module' => $id_module])
+                ->join('etudiants','etudiants.id', 'notes.id_etud')
+                ->select('notes.note','notes.id_module','etudiants.id', 'etudiants.cne', 'etudiants.nom', 'etudiants.prenom')
+                ->get();
+                if(!isset($items)) $items = false;
+                return view('noteTables',['items' => $items, 'id_module' => $items[0]->id_module]);
+            }
         }
+
     }
 

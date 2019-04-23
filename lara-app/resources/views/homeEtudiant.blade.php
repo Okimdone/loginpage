@@ -1,0 +1,5 @@
+@section('body')
+    @parent
+
+
+@endsection

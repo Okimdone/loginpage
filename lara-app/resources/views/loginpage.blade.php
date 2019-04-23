@@ -1,19 +1,25 @@
-<!doctype html>
-<html>
-    <head>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
+@extends('layout')
 
-            <h1>Login</h1>
-            <div>
-                <form action="/login" method="post">
-                    {{ csrf_field() }}
-                    <input type="text" name="uname" id="uname"> <br>
-                    <input type="password" name="password" id="password"> <br>
-                    <button type="submit">submit</button>
-                </form>
-            </div>
+@section('title')
+    Login - Page
+@endsection
+
+@section('CssAndScripts')
+
+@endsection
+
+@section('body')
+    <div class="flex-center position-ref full-height">
+        <h1>Login</h1>
+        <div>
+            <form id="login_form" method="POST">
+                {{ csrf_field() }}
+
+                <input type="text" name="uname" id="uname"> <br>
+                <input type="password" name="password" id="password"> <br>
+                <div id="badLoginMessage"></div>
+                <input type="submit" id="#submit" value="submit">
+            </form>
         </div>
-    </body>
-</html>
+    </div>
+@endsection

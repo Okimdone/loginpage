@@ -15,11 +15,10 @@ use Illuminate\Http\Request;
 Route::post('login', 'UserController@authenticate');
 
 Route::group(['middleware' => ['jwt.redirect']], function() {
-    Route::get('/', 'DataController@loginpage');
+    Route::get('/', 'DataController@homepage');
 });
 
 Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::get('user', 'UserController@getAuthenticatedUser');
-    Route::get('closed', 'DataController@closed');
+    Route::get('getNotes', 'DataController@getNotes');
     Route::post('sync', 'DataController@syncData');
 });
